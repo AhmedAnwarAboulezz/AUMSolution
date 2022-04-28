@@ -1,0 +1,7 @@
+{
+    "host": "http://192.168.3.250/api/api/",
+    "tamshost":"http://localhost/Organizations/api/",
+    "reportHost":"http://localhost:4530/api/",
+    "LogoutHub": "http://localhost/users/hub/" ,
+     "AumImageHost":"http://localhost/AumService.Api/"
+}

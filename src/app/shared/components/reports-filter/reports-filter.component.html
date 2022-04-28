@@ -1,0 +1,148 @@
+<div class="card" [className]="'textAlign' | translate" [dir]="'dir' | translate">
+  <div class="card-body">
+    <h5 class="card-title">{{screenTitle}}</h5>
+    <div class="row" [formGroup]="form">
+      <div class="col-md-12">
+        <div *ngIf="options.date" class="form-group row">
+          <div class="col-sm-6">
+            <label for="startDate" class="">{{'ReportFilter.startDate' | translate}}</label>
+            <div class='input-group date'>
+              <input class="form-control form-control-sm" [matDatepicker]="startDatePicker" formControlName="startDate">
+              <div class="input-group-addon border height-control">
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker (opened)="onOpen(startDatePicker)" #startDatePicker [calendarHeaderComponent]="header">
+                </mat-datepicker>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="endDate" class="">{{'ReportFilter.endDate' | translate}}</label>
+            <div class='input-group date'>
+              <input class="form-control form-control-sm" [matDatepicker]="endDatePicker" formControlName="endDate">
+              <div class="input-group-addon border height-control">
+                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker (opened)="onOpen(endDatePicker)" #endDatePicker [calendarHeaderComponent]="header">
+                </mat-datepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+        <div *ngIf="options.employee" class="form-group row ">
+          <div class="col-12 col-md-12">
+            <app-select [url]="'Employees/GetEmployeeDropDown'" formControlName="employeeIds"
+            [name]="'field.fullName' | translate" [isSearchable]="true" [hasTemplate]="true" [isMultiple]="true"
+            [placeholder]="'employeeSelect' | translate" (cancelEvent)="onEmployeeCancel()"></app-select>
+          </div>
+       </div>
+
+        <div *ngIf="options.devicetype" class="form-group row">
+          <div class="col-sm-6">
+            <label for="deviceTypeIds" class="">{{'ReportFilter.deviceType' | translate}}</label>
+            <mat-select class="form-control form-control-sm" formControlName="deviceTypeIds" multiple>
+              <mat-option #allSelected (click)="toggleAllSelection(allSelected.selected,'deviceTypeIds', 0)" [value]="0">
+                {{'all' | translate}}
+              </mat-option>
+              <mat-option (click)="toggleUnSelectAll(allSelected.selected, 'deviceTypeIds')"
+                *ngFor="let item of devicetypes" [value]="item.id">
+                {{ item.name  }}</mat-option>
+            </mat-select>
+          </div>
+       
+        </div>
+
+        <div *ngIf="options.logtype" class="form-group row">
+          <div class="col-sm-6">
+            <label for="logTypeIds" class="">{{'ReportFilter.logTypeIds' | translate}}</label>
+            <mat-select class="form-control form-control-sm" formControlName="logTypeIds" multiple>
+              <mat-option #allSelected (click)="toggleAllSelection(allSelected.selected,'logTypeIds', 4)" [value]="0">
+                {{'all' | translate}}
+              </mat-option>
+              <mat-option (click)="toggleUnSelectAll(allSelected.selected, 'logTypeIds')"
+                *ngFor="let item of logtypes" [value]="item.id">
+                {{ item.logTypeNameEn  }}</mat-option>
+            </mat-select>
+          </div>
+       
+        </div>
+
+       
+    
+        <div *ngIf="options.branch" class="form-group row">
+          <div class="col-sm-6">
+            <label for="branchIds" class="">{{'ReportFilter.branch' | translate}}</label>
+            <mat-select class="form-control form-control-sm" formControlName="branchIds" multiple>
+              <mat-option #allSelected (click)="toggleAllSelection(allSelected.selected,'branchIds', 1)" [value]="0">
+                {{'all' | translate}}
+              </mat-option>
+              <mat-option (click)="toggleUnSelectAll(allSelected.selected, 'branchIds')"
+                *ngFor="let item of branchs" [value]="item.id">
+                {{ item.name  }}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <div *ngIf="options.group" class="form-group row">
+          <div class="col-sm-6">
+            <label for="groupIds" class="">{{'ReportFilter.group' | translate}}</label>
+            <mat-select class="form-control form-control-sm" formControlName="groupIds" multiple>
+              <mat-option #allSelected (click)="toggleAllSelection(allSelected.selected,'groupIds', 2)" [value]="0">
+                {{'all' | translate}}
+              </mat-option>
+              <mat-option (click)="toggleUnSelectAll(allSelected.selected, 'groupIds')"
+                *ngFor="let item of groups" [value]="item.id">
+                {{ item.name  }}</mat-option>
+            </mat-select>
+          </div>
+       
+        </div>
+
+        <div *ngIf="options.serialNumber" class="form-group row">
+          <div class="col-sm-6">
+            <label for="deviceIds" class="">{{'ReportFilter.serialNumber' | translate}}</label>
+            <mat-select class="form-control form-control-sm" formControlName="deviceIds" multiple>
+              <mat-option #allSelected (click)="toggleAllSelection(allSelected.selected,'deviceIds', 3)" [value]="0">
+                {{'all' | translate}}
+              </mat-option>
+              <mat-option (click)="toggleUnSelectAll(allSelected.selected, 'deviceIds')"
+                *ngFor="let item of devices" [value]="item.id">
+                {{ item.deviceDescription  }}/{{item.serialNumber}}</mat-option>
+            </mat-select>
+          </div>
+       
+        </div>
+        <div class="form-group row" *ngIf="options.showoption">
+          <label class="col-sm-12 ">{{'ReportFilter.show' | translate}}</label>
+         
+       
+          <mat-slide-toggle *ngIf="options.bicharts" class="col-sm-4" formControlName="isPiChart" color="primary"
+            labelPosition="before">
+            {{'ReportFilter.bicharts' | translate}}
+          </mat-slide-toggle>
+          <mat-slide-toggle *ngIf="options.ownPage" class="col-sm-8" formControlName="isPaged" color="primary"
+            labelPosition="before">
+            {{'ReportFilter.ownPage' | translate}}
+          </mat-slide-toggle>
+        </div>
+      </div>
+    
+
+    </div>
+    <div class="row d-flex align-items-end flex-column">
+      <div class="p-2" align="end">      
+        <div class="dropdown" [ngClass]="(isLoading)?'noHover':'Hover'" >
+          <button  [ladda]="isLoading" class="btn btn-success dropdown-toggle" 
+          (click)="searchClick(1)"  >
+           {{'print' | translate}} {{'Pdf' | translate}} <span class="caret" style="float:left"> </span></button>
+
+          <div class="dropdown-content listOption">
+            <a (click)="searchClick(2)" style=" color:white ; padding:4px;" >{{'word' | translate}}</a>         
+          </div>
+        </div>
+        &nbsp;
+        <button *ngIf="!searchNow" class="btn btn-danger resetbtn" (click)="reset()">
+          {{'ReportFilter.resetButton' |  translate}}</button>
+      </div>
+
+    </div>
+  </div>
+</div>

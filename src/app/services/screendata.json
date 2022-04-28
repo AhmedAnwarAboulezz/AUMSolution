@@ -1,0 +1,396 @@
+[
+    {
+      "componentName": "menu1",
+      "orderNumber": 1,
+      "isReport": false,
+      "urlPath": null,
+      "iconName": "list",
+      "canShow": true,
+      "parentId": null,
+      "childerns": [
+        {
+          "componentName": "BranchesComponent",
+          "orderNumber": 1,
+          "isReport": false,
+          "urlPath": "/main/lookups/branches",
+          "iconName": "public",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 1
+        },
+        {
+          "componentName": "DepartmentsComponent",
+          "orderNumber": 2,
+          "isReport": false,
+          "urlPath": "/main/lookups/departments",
+          "iconName": "flag",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 2
+        },
+        {
+          "componentName": "LocationsComponent",
+          "orderNumber": 3,
+          "isReport": false,
+          "urlPath": "/main/lookups/locations",
+          "iconName": "location_on",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 3
+        },
+        {
+          "componentName": "DevicesComponent",
+          "orderNumber": 4,
+          "isReport": false,
+          "urlPath": "/main/lookups/devices",
+          "iconName": "school",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 4
+        },
+        {
+          "componentName": "GroupsComponent",
+          "orderNumber": 5,
+          "isReport": false,
+          "urlPath": "/main/lookups/groups",
+          "iconName": "work",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 5
+        },
+        {
+          "componentName": "TriggersComponent",
+          "orderNumber": 6,
+          "isReport": false,
+          "urlPath": "/main/lookups/triggers",
+          "iconName": "trending_up",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 6
+        },
+        {
+          "componentName": "AccessDoorsComponent",
+          "orderNumber": 7,
+          "isReport": false,
+          "urlPath": "/main/lookups/accessDoors",
+          "iconName": "import_contacts",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 7
+        },
+        {
+          "componentName": "HolidaiesComponent",
+          "orderNumber": 8,
+          "isReport": false,
+          "urlPath": "/main/lookups/holidaies",
+          "iconName": "domain",
+          "canShow": true,
+          "parentId": 1,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 8
+        }
+      ],
+      "permissions": null,
+      "id": 1
+    },
+    {
+      "componentName": "menu2",
+      "orderNumber": 2,
+      "isReport": false,
+      "urlPath": null,
+      "iconName": "people",
+      "canShow": true,
+      "parentId": null,
+      "childerns": [
+        {
+          "componentName": "EmployeesComponent",
+          "orderNumber": 1,
+          "isReport": false,
+          "urlPath": "/main/usermanagement/employees",
+          "iconName": "account_circle",
+          "canShow": true,
+          "parentId": 2,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 21
+        },
+        {
+          "componentName": "EmployeeGroupsComponent",
+          "orderNumber": 2,
+          "isReport": false,
+          "urlPath": "/main/usermanagement/employee-groups",
+          "iconName": "date_range",
+          "canShow": true,
+          "parentId": 2,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 22
+        },
+        {
+            "componentName": "GroupEmployeesComponent",
+            "orderNumber": 3,
+            "isReport": false,
+            "urlPath": "/main/usermanagement/group-employees",
+            "iconName": "account_circle",
+            "canShow": true,
+            "parentId": 2,
+            "childerns": [],
+            "permissions": {
+              "view": true,
+              "add": true,
+              "update": true,
+              "delete": true,
+              "print": true
+            },
+            "id": 23
+          },
+          {
+            "componentName": "EmployeesFingerprintComponent",
+            "orderNumber": 4,
+            "isReport": false,
+            "urlPath": "/main/usermanagement/employees-fingerprint",
+            "iconName": "account_circle",
+            "canShow": true,
+            "parentId": 2,
+            "childerns": [],
+            "permissions": {
+              "view": true,
+              "add": true,
+              "update": true,
+              "delete": true,
+              "print": true
+            },
+            "id": 24
+          },
+          {
+            "componentName": "EmployeeAttendancesComponent",
+            "orderNumber": 5,
+            "isReport": false,
+            "urlPath": "/main/usermanagement/employee-attendances",
+            "iconName": "account_circle",
+            "canShow": true,
+            "parentId": 2,
+            "childerns": [],
+            "permissions": {
+              "view": true,
+              "add": true,
+              "update": true,
+              "delete": true,
+              "print": true
+            },
+            "id": 25
+          }
+      ],
+      "permissions": null,
+      "id": 2
+    },
+    {
+      "componentName": "menu3",
+      "orderNumber": 3,
+      "isReport": false,
+      "urlPath": null,
+      "iconName": "lock",
+      "canShow": true,
+      "parentId": null,
+      "childerns": [
+        {
+          "componentName": "AccessGroupsComponent",
+          "orderNumber": 1,
+          "isReport": false,
+          "urlPath": "/main/accessGroups/accessGroups",
+          "iconName": "people_outline",
+          "canShow": true,
+          "parentId": 3,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 31
+        },
+        {
+          "componentName": "AccessGroupsWithDevicesComponent",
+          "orderNumber": 2,
+          "isReport": false,
+          "urlPath": "/main/accessGroups/accessGroupsDevices",
+          "iconName": "lock_open",
+          "canShow": true,
+          "parentId": 3,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 32
+        },
+        {
+          "componentName": "AccessGroupsWithEmployeesComponent",
+          "orderNumber": 3,
+          "isReport": false,
+          "urlPath": "/main/accessGroups/accessGroupsEmployees",
+          "iconName": "perm_identity",
+          "canShow": true,
+          "parentId": 3,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 33
+        }
+      ],
+      "permissions": null,
+      "id": 3
+    },
+    {
+      "componentName": "menu4",
+      "orderNumber": 4,
+      "isReport": false,
+      "urlPath": null,
+      "iconName": "history",
+      "canShow": true,
+      "parentId": null,
+      "childerns": [
+        {
+          "componentName": "RolesComponent",
+          "orderNumber": 1,
+          "isReport": false,
+          "urlPath": "/main/lookups/roles",
+          "iconName": "search",
+          "canShow": true,
+          "parentId": 4,
+          "childerns": [],
+          "permissions": {
+            "view": true,
+            "add": true,
+            "update": true,
+            "delete": true,
+            "print": true
+          },
+          "id": 41
+        },
+        {
+            "componentName": "GroupRolesComponent",
+            "orderNumber": 2,
+            "isReport": false,
+            "urlPath": "/main/usermanagement/group-roles",
+            "iconName": "search",
+            "canShow": true,
+            "parentId": 4,
+            "childerns": [],
+            "permissions": {
+              "view": true,
+              "add": true,
+              "update": true,
+              "delete": true,
+              "print": true
+            },
+            "id": 42
+          },
+          {
+            "componentName": "UsermangmentsComponent",
+            "orderNumber": 3,
+            "isReport": false,
+            "urlPath": "/main/usermanagement/usermangments",
+            "iconName": "search",
+            "canShow": true,
+            "parentId": 4,
+            "childerns": [],
+            "permissions": {
+              "view": true,
+              "add": true,
+              "update": true,
+              "delete": true,
+              "print": true
+            },
+            "id": 43
+          }
+      ],
+      "permissions": null,
+      "id": 4
+    }
+]

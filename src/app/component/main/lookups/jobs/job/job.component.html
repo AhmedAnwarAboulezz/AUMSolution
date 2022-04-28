@@ -1,0 +1,24 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'jobs.job'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form" novalidate > 
+      <div class="example-container">
+        <div class=row>
+            <mat-form-field appearance="outline" class="col-12 col-md-12">
+                <mat-label>{{'jobs.code' | translate}}</mat-label>
+                <input autocomplete="off" matInput formControlName="jobCode">
+              </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'jobs.jobNameAr' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="jobNameAr">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'jobs.jobNameEn' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="jobNameEn" required title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-dialog-content>
+  
+    <app-save-and-close [form]="form" (close)="close($event)"></app-save-and-close>
+  
+  </div>

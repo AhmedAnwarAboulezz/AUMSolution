@@ -1,0 +1,205 @@
+<div class="sidebar">
+  <div class="logo mb-3 text-center">
+    <h1 class="font-24 font-weight-bold text-gradient-primary">{{ 'TITLE' | translate}}</h1>
+  </div>
+  <div class="brand mb-3 d-flex align-items-center justify-content-center">
+    <div class="brand-img">
+      <img src="assets/images/biglogo.png" alt="">
+    </div>
+  </div>
+  <div class="sidebar-nav">
+    <ul>
+      <li>
+        <a routerLink="/main/home" routerLinkActive="active" class="d-flex align-items-center parent">
+          <span>
+            <i class='bi bi-house-fill text-gradient-primary'></i>
+          </span>
+          <span class="nav-link">{{ 'ScreenName.HomeComponent' | translate}}</span>
+        </a>
+      </li>
+      <li class="collapse-wrapper" *ngFor="let parent of authService.screens">
+        <a href="javascript:" class="d-flex align-items-center parent justify-content-between" 
+           [ngClass]="{'active': rla?.isActive }" (click)="setActive(parent.componentName)">
+           <!-- <span>
+            <i class='bi text-gradient-primary {{parent.iconName}}' ></i>
+          </span> -->
+          <span>
+            <mat-icon [matTooltip]="parent.componentName | translate" class="m-2">{{parent.iconName}}</mat-icon>
+          </span>
+          <span class="nav-link">{{ parent.componentName | translate}}</span>
+          <span class="nav-link" slot="end" >
+            <i *ngIf="activeTab == parent.componentName" class='bi bi-caret-up-square text-gradient-primary font-26'></i>
+            <i *ngIf="activeTab !== parent.componentName" class='bi bi-caret-down-square text-gradient-primary font-26'></i>
+          </span>
+        </a>
+        <div class="contentCollapsed" setRtl [ngClass]="{'showContent': activeTab === parent.componentName}">
+          <div class="d-flex flex-column" *ngFor="let childern of parent.childerns">
+                <a class="nav-link" *ngIf="childern.canShow" mat-list-item [routerLink]="childern.urlPath"  routerLinkActive="active"  #rla="routerLinkActive">
+                  <span>
+                    <!-- <i class='bi  text-gradient-primary font-26 {{childern.iconName}}'></i> -->
+                    <mat-icon [matTooltip]="childern.componentName | translate" class="m-2">{{childern.iconName}}</mat-icon>
+                  </span>
+                  <span>  {{ ('ScreenName.'+ childern.componentName) | translate}}</span>
+                </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- <li class="collapse-wrapper">
+        <a href="javascript:" class="d-flex align-items-center parent justify-content-between" [ngClass]="{'active': locations?.isActive 
+        || departments?.isActive 
+        || devices?.isActive
+        
+        || triggers?.isActive
+        || holidaies?.isActive
+        || groups?.isActive
+        || accessDoors?.isActive
+        || branches?.isActive
+        }" (click)="setActive('Lookups')">
+          <span>
+            <i class='bi bi-card-list text-gradient-primary'></i>
+          </span>
+          <span class="nav-link">{{ 'menu1' | translate}}</span>
+          <span class="nav-link">
+            <i class='bi bi-caret-down-square text-gradient-primary font-26'></i>
+          </span>
+        </a>
+        <div class="contentCollapsed" setRtl [ngClass]="{'showContent': activeTab === 'Lookups'}">
+          <div class="d-flex flex-column">
+            <a [hidden]="AuthService.currentUser.IsSuperAdmin == 'False'" [routerLink]="['/main/lookups/branches']" routerLinkActive="active" #branches="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.BranchesComponent' | translate }}</span>
+            </a>  
+            <a [routerLink]="['/main/lookups/departments']" routerLinkActive="active" #departments="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.DepartmentsComponent' | translate }}</span>
+            </a>
+            <a [routerLink]="['/main/lookups/locations']" routerLinkActive="active" #locations="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.LocationsComponent' | translate }}</span>
+            </a>
+        
+            <a [routerLink]="['/main/lookups/devices']" routerLinkActive="active" #devices="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.DevicesComponent' | translate }}</span>
+            </a>  
+            <a [routerLink]="['/main/lookups/groups']" routerLinkActive="active" #groups="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.GroupsComponent' | translate }}</span>
+            </a>   
+            <a [routerLink]="['/main/lookups/triggers']" routerLinkActive="active" #triggers="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.TriggersComponent' | translate }}</span>
+            </a>
+
+            <a [routerLink]="['/main/lookups/accessDoors']" routerLinkActive="active" #accessDoors="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.AccessDoorsComponent' | translate }}</span>
+            </a>
+            <a [routerLink]="['/main/lookups/holidaies']" routerLinkActive="active" #holidaies="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.HolidaiesComponent' | translate }}</span>
+            </a>  
+
+
+              
+
+          </div>
+        </div>
+      </li>
+      <li class="collapse-wrapper">
+        <a href="javascript:" class="d-flex align-items-center parent justify-content-between" [ngClass]="{
+          'active':  employees?.isActive 
+          || groupEmployees?.isActive 
+          || employeeGroups?.isActive 
+          || employeesFingerprint?.isActive
+          || employeeAttendances?.isActive
+          }" (click)="setActive('Usermanagement')">
+          <span>
+            <i class='bi bi-people-fill text-gradient-primary'></i>
+          </span>
+          <span class="nav-link">{{ 'menu2' | translate}}</span>
+          <span class="nav-link">
+            <i class='bi bi-caret-down-square text-gradient-primary font-26'></i>
+          </span>
+        </a>
+        <div class="contentCollapsed" setRtl [ngClass]="{'showContent': activeTab === 'Usermanagement'}">
+          <div class="d-flex flex-column">
+            <a [routerLink]="['/main/usermanagement/employees']" routerLinkActive="active" #employees="routerLinkActive">
+                <span class="nav-link">{{'ScreenName.EmployeesComponent' |translate }}</span>
+            </a> 
+            <a [routerLink]="['/main/usermanagement/employee-groups']" routerLinkActive="active" #employeeGroups="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.EmployeeGroupsComponent' | translate }}</span>
+          </a>
+            
+            <a [routerLink]="['/main/usermanagement/group-employees']" routerLinkActive="active" #groupEmployees="routerLinkActive">
+                <span class="nav-link">{{'ScreenName.GroupEmployeesComponent' | translate }}</span>
+            </a> 
+
+            <a [routerLink]="['/main/usermanagement/employees-fingerprint']" routerLinkActive="active" #employeesFingerprint="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.EmployeesFingerprintComponent' | translate }}</span>
+            </a>
+            <a [routerLink]="['/main/usermanagement/employee-attendances']" routerLinkActive="active" #employeeAttendances="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.EmployeeAttendancesComponent' | translate }}</span>
+            </a>
+
+          </div>
+        </div>
+      </li>
+
+      <li class="collapse-wrapper">
+        <a href="javascript:" class="d-flex align-items-center parent justify-content-between" [ngClass]="{'active':  accessGroups?.isActive || accessGroupsDevices?.isActive ||accessGroupsEmployees?.isActive }"  (click)="setActive('AccessGroups')">
+          <span>
+            <i class='bi bi-collection-fill text-gradient-primary'></i>
+          </span>
+          <span class="nav-link">{{ 'menu3' | translate}}</span>
+          <span class="nav-link">
+            <i class='bi bi-caret-down-square text-gradient-primary font-26'></i>
+          </span>
+        </a>
+        <div class="contentCollapsed" setRtl [ngClass]="{'showContent': activeTab === 'AccessGroups'}">
+          <div class="d-flex flex-column">
+            <a [routerLink]="['/main/accessGroups/accessGroups']" routerLinkActive="active" #accessGroups="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.AccessGroupsComponent' | translate }}</span>
+            </a>
+            <a [routerLink]="['/main/accessGroups/accessGroupsDevices']" routerLinkActive="active" #accessGroupsDevices="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.AccessGroupsWithDevicesComponent' | translate }}</span>   
+            </a>
+            <a [routerLink]="['/main/accessGroups/accessGroupsEmployees']" routerLinkActive="active" #accessGroupsEmployees="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.AccessGroupsWithEmployeesComponent' | translate }}</span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+
+      <li class="collapse-wrapper">
+        <a href="javascript:" class="d-flex align-items-center parent justify-content-between" [ngClass]="{'active': 
+          roles?.isActive ||
+          groupRoles?.isActive ||
+          usermangmentsRoles?.isActive
+        }"  (click)="setActive('RolesMenu')">
+          <span>
+            <i class='bi bi-collection-fill text-gradient-primary'></i>
+          </span>
+          <span class="nav-link">{{ 'menu4' | translate}}</span>
+          <span class="nav-link">
+            <i class='bi bi-caret-down-square text-gradient-primary font-26'></i>
+          </span>
+        </a>
+        <div class="contentCollapsed" setRtl [ngClass]="{'showContent': activeTab === 'RolesMenu'}">
+          <div class="d-flex flex-column">
+            <a [routerLink]="['/main/lookups/roles']" routerLinkActive="active" #roles="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.RolesComponent' | translate }}</span>
+            </a>  
+
+            <a [routerLink]="['/main/usermanagement/group-roles']" routerLinkActive="active" #groupRoles="routerLinkActive">
+              <span class="nav-link">{{'ScreenName.GroupRolesComponent' | translate }}</span>
+          </a> 
+
+          <a [routerLink]="['/main/usermanagement/usermangments']" routerLinkActive="active" #usermangmentsRoles="routerLinkActive">
+            <span class="nav-link">{{'ScreenName.UsermangmentsComponent' | translate }}</span>
+        </a>
+
+          </div>
+        </div>
+      </li> -->
+
+    </ul>
+  </div>
+</div>
+
+
+

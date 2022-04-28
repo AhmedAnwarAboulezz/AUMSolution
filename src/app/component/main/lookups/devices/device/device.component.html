@@ -1,0 +1,43 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'lookup.device'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form" novalidate > 
+      <div class="example-container">
+        <div class=row>
+        
+          <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'device.DeviceCode' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="serialNumber" required title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'device.description' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="deviceDescription" required title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'device.location' | translate}}</mat-label>
+            <mat-select required  title="{{'lookup.tooltip' | translate}}" formControlName="locationId">
+              <mat-option>---</mat-option>
+              <mat-option  *ngFor="let res of locations" [value]="res.id">
+              {{ res.name}}</mat-option>
+            </mat-select>
+         </mat-form-field>
+         <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'device.deviceType' | translate}}</mat-label>
+            <mat-select required  title="{{'lookup.tooltip' | translate}}" formControlName="deviceTypeId">
+              <mat-option>---</mat-option>
+              <mat-option  *ngFor="let res of deviceType" [value]="res.id">
+              {{ res.name }}</mat-option>
+            </mat-select>
+         </mat-form-field>
+         <mat-form-field appearance="outline" class="col-12 col-md-12">
+          <mat-label>{{'device.DeviceAddress' | translate}}</mat-label>
+          <input autocomplete="off" matInput formControlName="ipAddress">
+        </mat-form-field>
+
+        </div>       
+      </div>
+    </mat-dialog-content>
+  
+    <app-save-and-close [form]="form" (close)="close($event)"></app-save-and-close>
+  
+  </div>

@@ -1,0 +1,77 @@
+header {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 0 8px rgb(230, 230, 230);
+    height: 80px;
+    width: 100% !important;
+    transition: 0.3s;
+}
+
+.right-part {
+    i {
+        cursor: pointer;
+    }
+}
+
+.left-part {
+    ul {
+        list-style-type: none;
+
+        li {
+            // margin-left: 30px;
+            cursor: pointer;
+        }
+    }
+    .profile {
+        .avatar {
+            margin-inline-end: 1rem;
+
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+        }
+    }
+    li.has-dots span {
+        position: relative;
+    }
+    li.has-dots span::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 8px;
+        height: 8px;
+        background-color: #fe7096;
+        border-radius: 50px;
+    }
+}
+
+/* Navbar icon*/
+.language-icon {
+    height: 25px !important;
+    margin-top: 10px;
+
+    &:hover {
+        background: none;
+    }
+}
+
+.drop-item {
+    cursor: pointer;
+}
+
+::ng-deep .notification-menu {
+    padding: 0 10px !important;
+    width: 200px !important;
+    mat-list-item {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .not-read {
+        background-color: f4f4f4;
+    }
+}

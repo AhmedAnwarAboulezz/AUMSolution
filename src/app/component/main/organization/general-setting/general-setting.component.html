@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-title>{{ 'organizations.GeneralSettings' | translate}}</mat-card-title>
+    <mat-dialog-content class="mat-typography" [formGroup]="formsetting">
+      <mat-accordion>
+         <form [formGroup]="formsetting" (ngSubmit)="edit2()">
+                <div class="example-container">
+                  <div class=row>  
+                    <mat-label>{{ 'organizations.AutoSyncUsergroups' | translate}}</mat-label>
+                    
+                    <div class="col-12 col-md-6" appearance="outline">
+                    
+                        <mat-radio-group formControlName="chooseAutoSync" >
+                          <mat-radio-button *ngFor="let op of chooseAutoSyncs" [labelPosition]="'after'"
+                            [disabled]="Radio" [value]="op.id" >
+                            {{ op.name}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>       
+            
+                  </div> 
+                  <div *ngIf="formsetting.value.chooseAutoSync === chooseAutoSyncEnum.SpecificGroups"  class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="organizationSettingGroups" class="">{{'ReportFilter.group' | translate}}</label>
+                      <mat-select class="form-control form-control-sm" formControlName="organizationSettingGroups" multiple>
+                        <!-- <mat-option #allSelected (click)="toggleAllSelection(allSelected.selected,true)" [value]="0">
+                            {{'all' | translate}}
+                          </mat-option> -->
+                          <mat-option                    
+                          *ngFor="let item of groups" [value]="item.id">
+                          {{ item.name  }}</mat-option>
+                      </mat-select>
+                    </div>
+                 
+                  </div>
+                 
+                  <br>
+                
+
+                  <div class="row">
+                      <button mat-raised-button color="primary" type="submit" [disabled]="!formsetting.valid">{{ 'save' | translate}}</button>
+                    </div>                            
+                </div>
+              </form>
+      </mat-accordion>
+    </mat-dialog-content>
+  </mat-card>
+

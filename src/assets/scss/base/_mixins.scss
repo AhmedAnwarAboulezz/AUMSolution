@@ -1,0 +1,82 @@
+/* How to use */
+/*
+.some-div{
+  @include small-screen{
+    width: 100%;
+  }
+}
+*/
+
+/* Screen Sizes */
+
+// Small Screens
+@mixin small-screen {
+  @media only screen and (min-width: 640px) {
+    @content;
+  }
+}
+
+// Medium Screens
+@mixin medium-screen {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+// Normal Screens
+@mixin normal-screen {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Large Screens
+@mixin large-screen {
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+// xLarge Screens
+@mixin xlarge-screen {
+  @media only screen and (min-width: 1400px) {
+    @content;
+  }
+}
+
+// xxLarge Screens
+@mixin xxlarge-screen {
+  @media only screen and (min-width: 1636px) {
+    @content;
+  }
+}
+
+// xxxLarge Screens
+@mixin xxxlarge-screen {
+  @media only screen and (min-width: 2200px) {
+    @content;
+  }
+}
+/* Gradient Color*/
+@mixin button-gradient-variant($value) {
+  background: $value;
+  border: 0;
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    background: $value;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+  &:not(.btn-gradient-light) {
+    color: $white;
+    &:hover,
+    &:focus,
+    &:active {
+      color: $white;
+    }
+  }
+
+  transition: all 0.3s ease;
+}

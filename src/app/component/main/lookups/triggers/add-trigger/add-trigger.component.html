@@ -1,0 +1,42 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'triggers.trigger'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form" novalidate > 
+      <div class="example-container">
+        <div class=row>
+            <mat-form-field appearance="outline" class="col-6">
+                <mat-label>{{'triggers.trigger' | translate}}</mat-label>
+                    <mat-select required  title="{{'lookup.tooltip' | translate}}" formControlName="triggerTypeId">
+                      <mat-option>---</mat-option>
+                      <mat-option *ngFor="let item of triggersTypes" [value]="item.id">
+                        {{  item.name }}</mat-option>
+                    </mat-select>
+              </mat-form-field>
+     
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>{{'triggers.triggerName' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="triggerName" required title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+        </div>
+        <div class=row>
+            <!-- <mat-form-field appearance="outline" class="col-6">
+                <mat-label>{{'triggers.devices' | translate}}</mat-label>
+                    <mat-select multiple required  title="{{'lookup.tooltip' | translate}}" 
+                    formControlName="triggerDevice" (closed)="closeDropDown('triggerDevice')" (opened)="openDropDown('triggerDevice',1)" >
+                        <mat-option selected #allSelected (click)="toggleAllSelection(allSelected.selected,'triggerDevice',1)" [value]="0">{{'ReportFilter.all' | translate}}</mat-option>
+                        <mat-option (click)="toggleUnSelectAll( 'triggerDevice',1)" *ngFor="let item of devices" [value]="item.id">
+                        {{  item.name }}</mat-option>
+                    </mat-select>
+              </mat-form-field> -->
+          <div class="col-6 format">
+            <mat-checkbox matInput [checked]="false" formControlName="isEnabled" color="primary"
+              labelPosition="after">
+              <mat-label>{{'triggers.active' | translate}}</mat-label>
+            </mat-checkbox>
+          </div>
+        </div>       
+      </div>
+    </mat-dialog-content>
+  
+    <app-save-and-close [form]="form" (close)="closeConfirmation($event)"></app-save-and-close>
+  
+  </div>

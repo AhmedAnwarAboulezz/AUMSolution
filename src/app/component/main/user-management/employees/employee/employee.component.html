@@ -1,0 +1,118 @@
+
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'employees.personalEmployeeData'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form" novalidate > 
+      <div class="example-container">
+        <div class=row>
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>{{'employees.employeeNumber' | translate}}</mat-label>
+                <input [readonly]="!isNew" autocomplete="off" matInput formControlName="employeeNumber" required title="{{'lookup.tooltip' | translate}}">
+              </mat-form-field>
+          <mat-form-field appearance="outline" class="col-md-3">
+            <mat-label>{{'employees.employeeNameFirst' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="firstName" title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-md-3">
+            <mat-label>{{'employees.employeeNameSecond' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="lastName"  title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-md-3">
+            <mat-label>{{'employees.employeeNameOther' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="otherName"  title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+        </div>
+        <!-- <div class=row>
+         
+      
+        </div> -->
+        <div class=row>
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>{{'employees.adminLevel' | translate}}</mat-label>
+                    <mat-select required  title="{{'lookup.tooltip' | translate}}" formControlName="adminLevelId">
+                      <mat-option>---</mat-option>
+                      <mat-option *ngFor="let item of adminLevels" [value]="item.id">
+                        {{  item.name }}</mat-option>
+                    </mat-select>
+              </mat-form-field>
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>{{'employees.fingerPrintSecurityLevel' | translate}}</mat-label>
+                    <mat-select required  title="{{'lookup.tooltip' | translate}}" formControlName="fingerPrintSecurityLevelId">
+                      <mat-option>---</mat-option>
+                      <mat-option *ngFor="let item of fingerPrintSecurityLevels" [value]="item.id">
+                        {{ item.name }}</mat-option>
+                    </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>{{'employees.department' | translate}}</mat-label>
+                    <mat-select multiple required  title="{{'lookup.tooltip' | translate}}" 
+                    formControlName="employeeDepartments"  (closed)="closeDropDown('employeeDepartments')" (opened)="openDropDown('employeeDepartments',2)">
+                        <mat-option selected #allSelected (click)="toggleAllSelection(allSelected.selected,'employeeDepartments',2)" [value]="0">{{'ReportFilter.all' | translate}}</mat-option>
+                        <mat-option (click)="toggleUnSelectAll( 'employeeDepartments',2)" *ngFor="let item of departments" [value]="item.id">
+                        {{  item.name }}</mat-option>
+                    </mat-select>
+              </mat-form-field>
+              <mat-form-field  appearance="outline" class="col-md-3">
+                <mat-label>{{'employees.accessGroups' | translate}}</mat-label>
+                    <mat-select required multiple title="{{'lookup.tooltip' | translate}}" 
+                    formControlName="employeeAccessGroup" (closed)="closeDropDown('employeeAccessGroup')" (opened)="openDropDown('employeeAccessGroup',3)" >
+                    <mat-option selected #allSelectedAccessGroup (click)="toggleAllSelection(allSelectedAccessGroup.selected,'employeeAccessGroup',3)" [value]="0">{{'ReportFilter.all' | translate}}</mat-option>
+                    <mat-option (click)="toggleUnSelectAll( 'employeeAccessGroup',3)" *ngFor="let item of accessGroups" [value]="item.id">
+                        {{  item.name  }}</mat-option>
+                    </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-checkbox appearance="outline" class="col-md-6" formControlName="isActiveEmployee">
+                {{'employees.isActiveEmployee' | translate}}
+              </mat-checkbox>
+        </div>
+        <br>
+
+        <div class="row">
+            <mat-checkbox appearance="outline" (change)="onCheckChange($event,'password')" class="col-md-3" formControlName="isUsePassword">
+                {{'employees.isUsePassword' | translate}}
+              </mat-checkbox>
+              <mat-form-field  appearance="outline" class="col-md-3" >
+                <input [type]="hide ? 'password' : 'text'" matInput placeholder="{{'Login.Password' | translate}}" 
+                formControlName="password" [readonly]="!this.form.get('isUsePassword').value">
+               <mat-icon   matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </mat-form-field>
+              <mat-checkbox appearance="outline" (change)="onCheckChange($event,'smartCardNumber')" class="col-md-3" formControlName="isUseSmartCard">
+                {{'employees.isUseSmartCard' | translate}}
+              </mat-checkbox>
+              <mat-form-field  appearance="outline" class="col-md-3" > 
+                <mat-label>{{'employees.smartCardNumber' | translate}}</mat-label>
+                <input autocomplete="off" matInput formControlName="smartCardNumber"  title="{{'lookup.tooltip' | translate}}" [readonly]="!this.form.get('isUseSmartCard').value">
+              </mat-form-field>
+        </div>
+        <!-- <div class="row">
+           
+            
+        </div> -->
+        <div class="row">
+            <mat-checkbox appearance="outline" class="col-md-3" formControlName="isUseFingerPrint">
+                {{'employees.isUseFingerPrint' | translate}}
+              </mat-checkbox>
+              <mat-checkbox appearance="outline" class="col-md-3" 
+              [disabled]="!this.form.get('isUseFingerPrint').value"
+              [checked]="this.form.get('isUseFingerPrint').value"
+              formControlName="isFingerPrintAutoMatch">
+                {{'employees.isFingerPrintAutoMatch' | translate}}
+              </mat-checkbox>
+              <mat-checkbox appearance="outline" class="col-md-3" formControlName="isUseFace">
+                {{'employees.isUseFace' | translate}}
+              </mat-checkbox> 
+               <mat-checkbox appearance="outline" class="col-md-3" 
+               [disabled]="!this.form.get('isUseFace').value"
+               [checked]="this.form.get('isUseFace').value"
+               formControlName="isFaceAutoMatch">
+                {{'employees.isFaceAutoMatch' | translate}}
+              </mat-checkbox>
+        </div>
+        
+      </div>
+    </mat-dialog-content>
+  
+    <app-save-and-close [form]="form" (close)="closeConfirmation($event)"></app-save-and-close>
+  
+  </div>

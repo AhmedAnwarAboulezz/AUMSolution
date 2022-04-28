@@ -1,0 +1,47 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+  
+    <app-dialogheader [text]="'groups.title'" (onclick)="onNoClick('Close')"></app-dialogheader>
+  
+    <mat-dialog-content class="mat-typography" [formGroup]="form">
+      <div class="example-container">
+        <div class=row>
+            <div class="col-md-12">
+                <app-select [url]="'Employees/GetEmployeeDropDown'" [disabledCondition]="!isNew" formControlName="employeeId"
+                [name]="'field.fullName' | translate" [isSearchable]="true" [hasTemplate]="true" [isMultiple]="false"
+                [placeholder]="'employeeSelect' | translate" (cancelEvent)="onEmployeeCancel()"></app-select>
+              </div>
+                <div  class="form-group col-md-12">
+                      <label for="groupIds" >{{'ReportFilter.group' | translate}}</label>
+                      <mat-select [disabled]="!isNew" class="form-control form-control-sm" formControlName="groupId">
+                       
+                        <mat-option
+                          *ngFor="let item of groups" [value]="item.id">
+                          {{ item.name  }}</mat-option>
+                      </mat-select>
+                    
+                 
+                  </div>
+
+                <div class="form-group col-md-12">
+                    <app-mat-datepicker-shared 
+                    [parentForm]="form"
+                    [lblName]= "'employees.expireDate' | translate"   
+                    [required]="true" 
+                    [title]="'lookup.tooltip' | translate"   
+                    [matDatepicker]="'startDatePicker'"
+                    [namecontrol]="'expireDate'"
+                    >
+                    </app-mat-datepicker-shared> 
+                </div>
+         
+        </div>
+      </div>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions  align="end">
+      <div class="col-md-12">
+          <button data-display="static" mat-raised-button color="primary" [disabled]="!this.form.valid" cdkFocusInitial
+          (click)="onAddSave(form.value)">{{'updateclose' | translate}}</button>  
+      </div>
+  </mat-dialog-actions>  
+  </div>

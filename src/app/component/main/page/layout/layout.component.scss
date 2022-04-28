@@ -1,0 +1,21 @@
+main {
+    height: 100vh;
+    overflow: hidden;
+
+    .main-page {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: whitesmoke !important;
+        transition: 0.3s;
+    }
+}
+
+footer mat-toolbar{
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 8px 0 0 0;
+    height: auto !important;
+    color: #084b7d;
+    font-weight: 700;
+    font-size: 19px;
+}

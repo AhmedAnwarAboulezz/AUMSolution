@@ -1,0 +1,12 @@
+<div relative>
+    <app-data-table [url]="{
+        getAll: 'Devices/GetAllPagedAccessTerminal',
+        delete:'Devices/delete'
+      }"  [id]="'id'" [columns]="columns" [actions]="actions" [options]="{
+          globalSearch: true,
+          details: false,
+          add:false
+        }" [tableData]="tableData" >
+      </app-data-table>
+</div>
+

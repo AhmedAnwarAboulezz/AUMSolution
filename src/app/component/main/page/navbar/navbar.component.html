@@ -1,0 +1,131 @@
+<header>
+    <div class="header-inner d-flex align-items-center justify-content-between">
+        <div class="right-part">
+            <a (click)="toggleSidebar()">
+                <span>
+                    <i class='bi bi-border-width font-26 text-gradient-primary'></i>
+                </span>
+            </a>
+        </div>
+
+        <div class="left-part w-100">
+            <ul class="d-flex align-items-center justify-content-end px-4 m-0">
+                <li class="profile-wrapper">
+                    <span>
+
+                        
+                        <div mat-button [matMenuTriggerFor]="profile" class="profile d-flex align-items-center">
+                            <div class="avatar">
+                                <img src="assets/images/faces/face1.jpg" alt="">
+                            </div>
+                           
+                            <div class="name">
+                                <div class="d-flex">
+                                    <h3 class="m-0">{{ Localize.isEnglish() ? profileModel?.nameEn :
+                                        profileModel?.nameAr }}</h3>
+                                    <i class="bi bi-arrow-down-circle-fill text-gradient-primary  font-20"></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <mat-menu #profile="matMenu">
+                           
+                            <mat-list role="list">
+                                <div style=" text-align: center;">
+                                 <p style="font-size:20px;">{{'ScreenName.hello' | translate }}  &nbsp; {{ AuthService.currentUser.sub}}</p>
+    
+                                </div>
+                                <div class="d-flex flex-row align-items-center justify-content-end p-2 drop-item"
+                                (click)="goToProfile()">
+                                
+                                    <i class='bi bi-person-circle text-gradient-primary font-24'></i>
+                                    <a [routerLink]="['/organization']">
+                                    <span class="nav-link">{{'ScreenName.OrganizationFilesComponent' | translate }}</span>
+                                  </a>  
+                                </div> 
+
+                                <div class="d-flex flex-row align-items-center justify-content-end p-2 drop-item"
+                                (click)="goToProfile()">
+                                
+                                    <i class='bi bi-person-circle text-gradient-primary font-24'></i>
+                                    <a [routerLink]="['/main/organizations']">
+                                    <span class="nav-link">{{'ScreenName.OrganizationsComponent' | translate }}</span>
+                                  </a>  
+                                </div> 
+
+                                <!-- <div class="d-flex flex-row align-items-center justify-content-end p-2 drop-item"
+                                    (click)="goToProfile()">
+                                    <i class='bi bi-person-circle text-gradient-primary font-24'></i>
+                                    <mat-list-item role="listitem">
+                                        {{ 'main.Profile' | translate }}
+                                    </mat-list-item>
+                                </div>  -->
+
+                                 <!-- <div class="d-flex flex-row align-items-center justify-content-end p-2 drop-item"
+                                    (click)="logout()">
+                                    <i class='bi bi-box-arrow-left text-gradient-warning font-24'></i>
+                                    <mat-list-item role="listitem">
+                                        {{ 'main.logout' | translate }}
+                                    </mat-list-item>
+                                </div> -->
+                            </mat-list>
+                        </mat-menu>
+                    </span>
+                </li>
+
+
+                <li *ngIf="AuthService.currentUser.IsSuperAdmin == 'False'">
+                    <mat-form-field appearance="outline" style="top: 9px;" >
+                        <mat-label>{{'branches.branch' | translate}}</mat-label>
+                            <mat-select   title="{{'lookup.tooltip' | translate}}" 
+                            (selectionChange)="changeBranch($event.value)"
+                            [(ngModel)]="selectedBranch" [disabled]="disableBranches">
+                             
+                               <mat-option *ngFor="let item of userBranches" [value]="item.id">
+                                {{ item.name }}</mat-option> 
+                            </mat-select>
+                      </mat-form-field>
+                </li>
+
+                <li>
+                    <span>
+                        <button mat-button [matMenuTriggerFor]="language">{{ 'HOME.SELECT' | translate}}
+                            <i class='bi bi-arrow-down-circle-fill text-gradient-primary font-20'></i>
+                        </button>
+                        <mat-menu #language="matMenu">
+                            <div *ngIf="Localize.isEnglish()"
+                                class="d-flex justify-content-center alig-items-center p-2 drop-item"
+                                (click)="setLanguage('ar')">
+                                <span class="mt-2">العربية</span>
+                                <img mat-menu-item class="language-icon" src="assets/images/kw-flag.png">
+                            </div>
+
+                            <div *ngIf="!Localize.isEnglish()"
+                                class="d-flex justify-content-center alig-items-center p-2 drop-item"
+                                (click)="setLanguage('en')">
+                                <span class="mt-2">English</span>
+                                <img mat-menu-item class="language-icon" src="assets/images/us-flag.png">
+                            </div>
+                        </mat-menu>
+                    </span>
+                </li>
+
+
+                <!-- <li class="mx-3">
+                    <span>
+                        <i class='bi bi-house-fill text-gradient-warning font-20'></i>
+                    </span>
+                </li> -->
+                <li class="mx-3">
+                <div class="d-flex flex-row align-items-center justify-content-end p-2 drop-item"
+                (click)="logout()">
+                <i class='bi bi-box-arrow-left text-gradient-warning font-24'></i>
+                    {{ 'main.logout' | translate }}
+                </div>
+               </li>
+
+            </ul>
+        </div>
+    </div>
+</header>

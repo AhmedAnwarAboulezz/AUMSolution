@@ -1,0 +1,109 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <mat-card>
+      <div class="row">
+        <mat-card-title class="col-md-12" style=" font-size: x-large; font-weight: 600;"> {{'employeeattendance.searchInEmployeeLogs' | translate}}</mat-card-title>
+      </div>
+      <mat-dialog-content class="mat-typography" [formGroup]="form">
+        <mat-accordion>
+          <mat-card class="example-container">
+            <div class=row>
+                <div class="col-12 col-md-6" >         
+                    <app-mat-datepicker-shared 
+                      [parentForm]="form"
+                      [lblName]= "'employeeLeaves.startDate' | translate"   
+                      [title]="'lookup.tooltip' | translate"   
+                      [matDatepicker]="'startDatePicker'"
+                      [namecontrol]="'startDate'"
+                    >
+                    </app-mat-datepicker-shared> 
+                  </div>
+                  <div class="col-12 col-md-6" >         
+                    <app-mat-datepicker-shared 
+                      [parentForm]="form"
+                      [lblName]= "'employeeLeaves.endDate' | translate"   
+                      [title]="'lookup.tooltip' | translate"   
+                      [matDatepicker]="'endDatePicker'"
+                      [namecontrol]="'endDate'"
+                    >
+                    </app-mat-datepicker-shared> 
+                  </div>
+                <hr>
+                <div class="col-12 col-md-12">
+                  <app-select [url]="'Employees/GetEmployeeDropDown'" formControlName="employeeId"
+                  [name]="'field.fullName' | translate" [isSearchable]="true" [hasTemplate]="true" [isMultiple]="false"
+                  [placeholder]="'employeeSelect' | translate" (cancelEvent)="onEmployeeCancel()"></app-select>
+                </div>
+                
+                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                  <mat-label>{{ 'advancedSearch.Branch' | translate }}</mat-label>
+                  <mat-select #sel multiple formControlName="branchId" >
+                    <mat-option *ngFor="let item of branchs" [value]="item.id">
+                      {{ localize.currentLang =='Fl' ? item.branchNameEn  : item.branchNameAr  }}</mat-option>
+                  </mat-select>
+                </mat-form-field> 
+        
+                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                  <mat-label>{{'employeeattendance.logType' | translate}}</mat-label>
+                  <mat-select #sel multiple formControlName="logTypeId">
+                    <mat-option *ngFor="let item of logTypes;" [value]="item.id">
+                    {{ localize.currentLang =='Fl' ? item.logTypeNameEn : item.logTypeNameAr }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                  <mat-label>{{'employeeattendance.remark' | translate}}</mat-label>    
+                  <mat-select #sel multiple formControlName="remarkId"
+                  (closed)="closeDrop('remarkId')" (opened)="openDrop('remarkId', 1)" >
+                    <mat-option #allSelected
+                    (click)="toggleAllSelection(allSelected.selected,'remarkId', 1)" [value]="0">
+                      {{'grouproles.all' | translate}}
+                    </mat-option> 
+                    <mat-option (click)="toggleUnSelectAll(allSelected.selected,'remarkId')"  *ngFor="let item of remarks;" [value]="item.id">
+                    {{ localize.currentLang =='Fl' ? item.remarkEn : item.remarkAr }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                               
+                <mat-form-field appearance="outline" class="col-12 col-md-6">
+                  <mat-label> {{'employeeattendance.terminalIp' | translate}} </mat-label>      
+                  <mat-select multiple  formControlName="deviceId">
+                    <mat-option *ngFor="let device of devices" [value]="device.id"> 
+                      {{ device.deviceDescription }} -->  {{ device.deviceCode }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field 
+                *ngIf="showAccessmethods"
+                appearance="outline" class="col-12 col-md-6">
+                  <mat-label>{{'employeeattendance.accessmethods' | translate}}</mat-label>    
+                  <mat-select #sel multiple formControlName="accessMethodId"
+                  (closed)="closeDrop('accessMethodId')" (opened)="openDrop('accessMethodId', 4)">
+                    <mat-option #allmethodsSelected (click)="toggleAllSelection(allmethodsSelected.selected,'accessMethodId', 4)" [value]="0">
+                      {{'grouproles.all' | translate}}
+                    </mat-option> 
+                    <mat-option (click)="toggleUnSelectAll(allmethodsSelected.selected,'accessMethodId')"  *ngFor="let item of accessmethods;" [value]="item.id">
+                    {{ localize.currentLang =='Fl' ? item.nameEn : item.nameAr }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              <div class="col-md-12 text-center">
+                <button mat-raised-button color="primary" (click)="searchToggle()" cdkFocusInitial>{{'search' | translate}}</button>
+            </div>
+
+            </div>
+          </mat-card>
+        </mat-accordion>
+      </mat-dialog-content>
+      <mat-dialog-content class="mat-typography" *ngIf="searchResult">
+        <mat-accordion>
+          <br>
+          <mat-card>    
+          <div relative>
+            <app-attendance-grid [searchValues]="form.value" [logtypes]="logTypes" [remarks]="remarks"></app-attendance-grid>
+          </div>      
+          </mat-card>
+        </mat-accordion>
+      </mat-dialog-content>
+    </mat-card>
+  </div>

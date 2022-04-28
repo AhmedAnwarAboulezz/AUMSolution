@@ -1,0 +1,72 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'locations.locations'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form" novalidate > 
+      <div class="example-container">
+        <div class=row>
+          <!-- <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'locations.code' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="code">
+          </mat-form-field> -->
+          <mat-form-field appearance="outline" class="col-6 col-md-6">
+            <mat-label>{{'locations.locationName' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="locationName"  title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-6 col-md-6">
+            <mat-label>{{'locations.timeZoneName' | translate}}</mat-label>
+            <mat-select required  title="{{'lookup.tooltip' | translate}}" formControlName="serviceTimeZoneId">
+              <mat-option>---</mat-option>
+              <mat-option  *ngFor="let res of timeZones" [value]="res.id">
+              {{ res.name}}</mat-option>
+            </mat-select>
+         </mat-form-field>
+          <div class="col-12 col-md-3 format">
+            <mat-checkbox matInput [checked]="false" formControlName="sntpEnable" color="primary"
+              labelPosition="after">
+              <mat-label>{{'locations.sntpEnable' | translate}}</mat-label>
+            </mat-checkbox>
+          </div>
+          <mat-form-field appearance="outline" class="col-3 col-md-3">
+            <mat-label>{{'locations.sntpServer' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="sntpServer"  title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline" class="col-6 col-md-6">
+            <mat-label>{{'locations.aPBTypeId' | translate}}</mat-label>
+            <mat-select required  title="{{'lookup.tooltip' | translate}}" formControlName="apbTypeId">
+              <mat-option>---</mat-option>
+              <mat-option  *ngFor="let res of aPBType" [value]="res.id">
+                {{ localize.currentLang =='Fl' ?  res.name : res.nameAr }} </mat-option>
+            </mat-select>
+         </mat-form-field>
+
+
+         <mat-form-field appearance="outline" class="col-6 col-md-6">
+          <mat-label>{{'locations.lunchIN' | translate}}</mat-label>
+          <input autocomplete="off" type="time" matInput formControlName="lunchIN"  title="{{'lookup.tooltip' | translate}}">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-6 col-md-6">
+          <mat-label>{{'locations.lunchOUT' | translate}}</mat-label>
+          <input autocomplete="off" type="time" matInput formControlName="lunchOUT"  title="{{'lookup.tooltip' | translate}}">
+        </mat-form-field>
+
+
+        <div class="col-12 col-md-6 format">
+          <mat-checkbox matInput (change)="onresetEnableChange($event.checked)" [checked]="false" formControlName="resetEnable" color="primary"
+            labelPosition="after">
+            <mat-label>{{'locations.resetEnable' | translate}}</mat-label>
+          </mat-checkbox>
+        </div>
+        <mat-form-field appearance="outline" class="col-6 col-md-6">
+          <mat-label>{{'locations.resetTime' | translate}}</mat-label>
+          <input [readonly]="!form.value.resetEnable" [requiredIf]="form.value.resetEnable" autocomplete="off" type="time" matInput formControlName="resetTime"  title="{{'lookup.tooltip' | translate}}">
+        </mat-form-field>
+
+        </div>       
+      </div>
+    </mat-dialog-content>
+  
+    <app-save-and-close [form]="form" (close)="close($event)"></app-save-and-close>
+  
+  </div>

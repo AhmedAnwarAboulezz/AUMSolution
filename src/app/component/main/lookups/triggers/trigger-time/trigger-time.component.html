@@ -1,0 +1,39 @@
+
+
+<div class="d-flex alig-items-center  mb-4">
+    <i class="bi bi-calendar3 text-gradient-primary font-26 mt-1"></i>
+    <h1 class="text-gradient-primary font-weight-bold font-24 mx-2 m-0">
+        {{ 'triggers.triggertime' | translate }}
+    </h1>
+</div>
+
+
+
+
+
+
+<app-loading *ngIf="showLoader"></app-loading>
+
+
+<div relative *ngIf="!showLoader">
+    <div style=" margin: 7px;">
+      <div class="row colored-header" style="margin-top: 14px;">
+        <div class="col-6">
+          <h3>
+            {{'triggers.triggerName' | translate}} : {{triggerName}}  
+          </h3>
+
+        </div>
+        <div class="col-6">
+          <h3 >{{'triggers.trigger' | translate}} :  {{triggerTypeName}}
+        </h3> 
+        </div>
+        
+      
+        
+      </div>
+    </div>
+</div>
+
+<app-access-time-table *ngIf="!showLoader" [daysCodes]="daysCodes" [groupRightsId]="triggerId" (fillTable)="saveTable($event)"></app-access-time-table>
+

@@ -1,0 +1,58 @@
+<mat-card>
+    <mat-card-title>{{ 'organizations.OrganizationLicences' | translate}}</mat-card-title>
+    <mat-dialog-content class="mat-typography" >
+      <mat-accordion>
+       
+        <div class="example-container">            
+            <mat-card>
+                <mat-card-title> {{ 'organizations.AumLicences' | translate}}</mat-card-title>
+                <hr>
+                <div class=row>  
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>  {{ 'organizations.NumberOfAumUsers' | translate}} </p> 
+                            </div>
+                            <div class=" col-md-6 formResult">
+
+                                <p>{{ model.usersCount }}</p>
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>  {{ 'organizations.NumberOfEmployee' | translate}} </p> 
+                            </div>
+                            <div class=" col-md-6 formResult">
+
+                                <p>{{ model.employeesCount }}</p>
+                            </div>
+                    </div>
+                    
+                </div>              
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p>  {{ 'organizations.AumExpireDate' | translate}} </p> 
+                            </div>
+                            <div class=" col-md-7 formResult">
+
+                                <p>{{ model.expireDateStr }}</p>
+                            </div>
+                    </div>
+                    
+                </div>
+
+                    
+                
+                                            
+                </div>  
+            </mat-card>   
+                </div>
+           
+              
+      </mat-accordion>
+    </mat-dialog-content>
+  </mat-card>

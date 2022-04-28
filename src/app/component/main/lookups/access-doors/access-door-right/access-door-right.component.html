@@ -1,0 +1,23 @@
+<div class="d-flex alig-items-center  mb-4">
+    <i class="bi bi-calendar3 text-gradient-primary font-26 mt-1"></i>
+    <h1 class="text-gradient-primary font-weight-bold font-24 mx-2 m-0">
+        {{ 'accessDoor.accessDoorsRight' | translate }}
+    </h1>
+</div>
+
+<app-loading *ngIf="showLoader"></app-loading>
+
+
+<div relative *ngIf="!showLoader">
+    <div style=" margin: 7px;">
+      <div class="row colored-header" style="margin-top: 14px;">
+        <h3 class="col-2">{{'accessDoor.accessDoorDescription' | translate}}
+        </h3>
+        <h3>{{accessDoorDescription}}            
+        </h3>
+        
+      </div>
+    </div>
+</div>
+
+<app-access-time-table *ngIf="!showLoader" [daysCodes]="daysCodes" [groupRightsId]="accessDoorId" (fillTable)="saveTable($event)"></app-access-time-table>

@@ -1,0 +1,114 @@
+<div relative>
+    <div style=" margin: 7px;">
+      <div class="row" style="margin-top: 14px;">
+        <h2 class="col-1">{{'Day' | translate}}</h2>
+        <ul class="row" >
+          <li class="rcorners"  *ngFor="let item of daysOfWeek; let i = index;" [ngClass]="(item.isChecked)?'checked':'unchecked'">
+            <mat-checkbox [value]="item.value" [checked]="item.isChecked" (change)="onChange(i, $event.checked)">
+              {{item.name}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style=" margin: 7px;">
+      <div class="row" style="margin-top: 14px;">
+        <h2 class="col-1">{{'Time' | translate}}</h2>
+        <mat-form-field appearance="outline" class="col-2 col-md-2">
+          <mat-label>{{ 'Hour' | translate }}</mat-label>
+          <mat-select [(ngModel)]="fromHour">
+            <mat-option *ngFor="let item of times" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+        <h2>:</h2>
+        <mat-form-field appearance="outline" class="col-2 col-md-2">
+          <mat-label>{{ 'Minute' | translate }}</mat-label>
+          <mat-select [(ngModel)]="fromMin">
+            <mat-option *ngFor="let item of mintuesMin" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+        <h2> - </h2>
+        <!-- <h2 class="col-1">{{'rotatedDuties.to' | translate}}</h2> -->
+        <mat-form-field appearance="outline" class="col-2 col-md-2">
+          <mat-label>{{ 'Hour' | translate }}</mat-label>
+          <mat-select [(ngModel)]="toHour" >
+            <mat-option *ngFor="let item of times" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+        <h2>:</h2>
+        <mat-form-field appearance="outline" class="col-2 col-md-2">
+          <mat-label>{{ 'Minute' | translate }}</mat-label>
+          <mat-select [(ngModel)]="toMin" >
+            <mat-option *ngFor="let item of mintuesMax" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">      
+        <div align="center">
+          <button  mat-raised-button style="color: white; background-color: green;" (click)="Apply()"
+            cdkFocusInitial>{{ 'dailyRotatedSchedules.Apply' | translate }}</button>
+            <button  mat-raised-button color="warn" (click)="resetAllTable()"
+            cdkFocusInitial>{{ 'employeeProfile.reset' | translate }}</button>          
+        </div>      
+      </div> 
+    </div>
+    <hr>
+    <table border="2">
+      <tr class="fancy-schedule">
+        <th> <mat-checkbox [disabled]="true" [indeterminate]="true"></mat-checkbox>
+        </th>
+        <th> {{'ReportFilter.days' | translate}}</th>
+        <th *ngFor="let time of times">{{ time }}</th>
+      </tr>
+      <tr *ngFor="let item of days; let i = index;">
+        <td class="fancy-schedule">
+            <mat-checkbox [checked]="daysReset[i]" (change)="resetDay(i, $event.checked)">               
+            </mat-checkbox>    
+        </td>
+        <td class="fancy-schedule">{{days[i]}}</td>
+        <td *ngFor="let data of times; let t = index" style="text-align: center;">
+          <mat-checkbox [disabled]="false" [checked]="(daysCodes[i] | getCheckedItem: t : 0)"  (change)="onCheckDay(i, t,0, $event.checked)"></mat-checkbox>
+          <mat-checkbox [disabled]="false" [checked]="(daysCodes[i] | getCheckedItem: t : 1)"  (change)="onCheckDay(i,t,1, $event.checked)"></mat-checkbox>
+        </td>
+      </tr>
+    </table>
+      <!-- <table border="2">
+      <tr class="fancy-schedule">
+        <th> {{'ReportFilter.days' | translate}}</th>
+        <th *ngFor="let time of times">{{ time }}</th>
+      </tr>
+      <tr *ngFor="let item of days; let i = index;">
+        <td class="fancy-schedule">{{days[i]}}</td>
+        <td *ngFor="let data of times; let t = index" style="text-align: center;">
+          <mat-checkbox [disabled]="true" [checked]="dayCodeArrays[i][t][0]" color="primary"></mat-checkbox>
+          <mat-checkbox [disabled]="true" [checked]="dayCodeArrays[i][t][1]" color="primary"></mat-checkbox>
+        </td>
+      </tr>
+    </table>-->
+  </div>
+<br>
+<br>
+<div class="row">
+<div class="col-md-12" align="end">
+    <button mat-raised-button color="primary" class="save-btn calender-btn" (click)="save()">
+      <i class="bi bi-check-lg"></i>
+    {{ 'leaveRegulations.Save' | translate}}
+    </button>
+</div> 
+</div>
+
+
+
+
+  <!-- {{daysCodes | json}} -->
+  

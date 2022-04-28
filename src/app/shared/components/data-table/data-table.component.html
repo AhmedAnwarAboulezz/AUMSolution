@@ -1,0 +1,282 @@
+<div *ngIf="!rerender">
+  <p-table #dt  id="ptable" [autoLayout]="true"  [resizableColumns]="true" [columns]="selectedColumns" [value]="tableCore.tableData"
+    [rows]="tableCore.pageOptions.limit" [dataKey]="id" [reorderableColumns]="true" [lazy]="true"
+    (onSort)="customSort($event)" columnResizeMode="expand"  (onColReorder)="saveColumnsOrder($event)"
+    [className]="'tableClass' | translate">
+
+    <ng-template pTemplate="caption">
+      <div class="row p-2 mt-2">
+        <div [className]="'tableNameDir' | translate" style="font-size: x-large;">
+          {{ tableData.name | translate}}
+        </div>
+        <div [className]="'tableIconDir' | translate">
+          <button *ngIf="roles.canAdd && options.add" mat-raised-button color="primary" class="mx-button"
+            [matTooltip]="'addNew' | translate" (click)="addRow()">
+            <mat-icon>add_box</mat-icon>
+          </button>
+          <button mat-raised-button color="primary" class="mx-button" [matMenuTriggerFor]="menu"
+            [matTooltip]="'selectColumn' | translate">
+            <mat-icon>touch_app</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <ng-container *ngFor="let column of columns; let i = index">
+              <div class="mat-menu-item" style="overflow: visible;">
+                <mat-checkbox [disabled]="column.disable" (change)="showOrHideColumns(column)"
+                  [(ngModel)]="column.selector">
+                  {{column.header | translate}}{{(column.addedText != null) ?  ('-' + (column.addedText | translate)): ''}}</mat-checkbox>
+              </div>
+            </ng-container>
+          </mat-menu>
+
+          <button *ngIf="roles.canPrint || options.print" class="mx-button" mat-raised-button [matMenuTriggerFor]="beforeMenu" color="primary"
+            [matTooltip]="'exporttrans' | translate">
+            <mat-icon>cloud_download</mat-icon>
+          </button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before"  class="matmen" >
+            <button mat-menu-item (click)="exportPdf()" class="menu-item" >PDF</button>
+            <button mat-menu-item (click)="exportExcel()" class="menu-item">Excel</button>
+          </mat-menu>
+
+          <button *ngIf="showTree" mat-raised-button color="primary" class="mx-button"
+            [matTooltip]="'administrativeLevel.showadministrativeLevel' | translate" (click)="displayTree()">
+            <mat-icon>dashboard </mat-icon>
+          </button>
+
+          <button  mat-raised-button color="primary" class="mx-button"
+           [matTooltip]="'Reset' | translate" (click)="resetFilter()">
+           <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 35px;">#</th>
+        <th  *ngFor="let col of columns"
+        [pSortableColumn]="col.sortName == undefined ? (col.field | translate) : (col.sortName | translate)"
+        pReorderableColumn [pSortableColumnDisabled]="!col.sort" pResizableColumn>
+        {{col.header | translate}} {{(col.addedText != null) ?  ('-' + (col.addedText | translate)): ''}}
+        <p-sortIcon [field]="col.sortName == undefined?(col.field | translate) : (col.sortName | translate)"
+          *ngIf="col.sort"></p-sortIcon>
+        </th>
+        <th *ngIf="actions" style="width: 10em;"></th>
+      </tr>
+      <tr class="search-controls" *ngIf="isSearchable">
+        <th></th>
+
+        <th [class.fixed]="col.filterMode === 'number'" *ngFor="let col of columns">
+          <div class="text" *ngIf="!col.filterMode || col.filterMode === 'text'">
+            <input class="input-field" pInputText data-placeholder="{{ 'search' | translate}}"
+              *ngIf="!(col.field === 'action')" type="text" style="width: 92%; padding: 6px"
+              (input)="columnSearchHandle($event.target.value, col.field, col.filterMode)" />
+              <mat-select align="end" [style.margin]="localize.lang =='ar' ? '0px 3px 0px 0px' : '0px 0px 0px 3px'" #filterList class="icon" (valueChange)="columnSearchHandleType(filterList.value, col.field)">
+                <mat-option [value]="0">
+                  {{ 'Contains' | translate }}
+                </mat-option>
+                <mat-option [value]="1">
+                  {{ 'StartWith' | translate }}
+                </mat-option>
+                <mat-option [value]="2">
+                  {{ 'EndWith' | translate }}
+                </mat-option>
+              </mat-select>
+          </div>
+          <div class="form-control" *ngIf="col.filterMode && col.filterMode === 'dropdown'">
+            <mat-select #sel multiple (valueChange)="columnSearchHandle(sel.value, col.dropdownFilterName)">
+              <mat-option *ngFor="let item of col.filterDropdown" [value]="item.id">
+                {{ item.name }}</mat-option>
+            </mat-select>
+          </div>
+
+          <div class="form-control" *ngIf="col.filterMode && col.filterMode === 'check'">
+            <mat-select #checkSel (valueChange)="columnSearchHandle(checkSel.value, col.field)">
+              <mat-option [value]="">
+                {{ 'all' | translate }}
+              </mat-option>
+              <mat-option [value]="1">
+                {{ 'checked' | translate }}
+              </mat-option>
+              <mat-option [value]="0">
+                {{ 'unChecked' | translate }}
+              </mat-option>
+            </mat-select>
+          </div>
+
+          <div class="form-control" *ngIf="col.filterMode && col.filterMode === 'status'">
+            <mat-select #statusSel (valueChange)="columnSearchHandle(statusSel.value, col.field)">
+              <mat-option [value]="">
+                {{ 'all' | translate }}
+              </mat-option>
+              <mat-option [value]="1">
+                <!-- <div class="circle-dot" [style.background]="'#25dc25'"></div> -->
+                {{ 'Online' | translate }}
+              </mat-option>
+              <mat-option [value]="0">
+                <!-- <div class="circle-dot" [style.background]="'#ff0000'"></div> -->
+                {{ 'Offline' | translate }}
+              </mat-option>
+            </mat-select>
+          </div>
+
+          <div *ngIf="col.filterMode && (col.filterMode === 'date' || col.filterMode === 'datetime')">
+            <mat-form-field style="width: 7em;">
+              <input matInput [matDatepicker]="dp3" data-placeholder="{{ 'Date'  | translate}}"
+                (dateChange)="columnSearchHandle($event.value, col.field)">
+              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker (opened)="onOpen(dp3)" #dp3 [calendarHeaderComponent]="header"></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="(col.filterMode && col.filterMode === 'time') || (col.filterMode && col.filterMode === 'timeFromDate')">
+            <mat-form-field style="width: 5em;">
+              <input matInput (change)="columnSearchHandle($event.target.value, col.field)" type="time">
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="col.filterMode && col.filterMode === 'number'">
+            <mat-form-field style="width: 5em;">
+              <input matInput (input)=" columnSearchHandle($event.target.value, col.field, col.filterMode)" 
+              type="number" min="0" >
+              
+              
+            </mat-form-field>
+          </div>
+        </th>
+        <th *ngIf="actions"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+      <tr [pSelectableRow]="rowData">
+
+        <td>
+          <div *ngIf="tableCore.pageOptions.offset === 0" class="loader"></div>
+          <div *ngIf="tableCore.pageOptions.offset !== 0">
+            {{(rowIndex + 1) + (tableCore.pageOptions.offset - 2) * tableCore.pageOptions.limit  }}</div>
+        </td>
+
+        <td *ngFor="let col of columns; let i = index" class="no-overlap">
+          <div *ngIf="!col.editable">
+            <div *ngIf="col.filterMode === 'date';">
+              <div *ngIf="col.filterMode === 'date';">
+                {{ rowData[col.field] | date: ('dateformat' | translate) }}
+              </div>
+            </div>
+            <div *ngIf="col.filterMode === 'time';">
+              <div *ngIf="col.filterMode === 'time';">
+                {{ rowData[col.field] != null ? (rowData[col.field] | showTimeSpan:"hh:mm a":"") : "" }}
+              </div>
+            </div>
+            <div *ngIf="col.filterMode === 'timeFromDate';">
+              <div *ngIf="col.filterMode === 'timeFromDate';">
+                {{ rowData[col.field] != null ? (rowData[col.field] | showTimeSpan:"hh:mm a": "fromDate") : "" }}
+              </div>
+            </div>
+            <div *ngIf="col.filterMode === 'datetime';">
+              <div *ngIf="col.filterMode === 'datetime';">
+                {{ rowData[col.field] | date: ('datetimeformat' | translate) }}
+              </div>
+            </div>
+            <div *ngIf="col.filterMode === 'check';" style="text-align: center;">
+              <mat-checkbox [(ngModel)]="rowData[col.field]" [disabled]="true"></mat-checkbox>
+            </div>
+            <div *ngIf="col.filterMode === 'status';" style="text-align: center;">
+              <div class="circle-dot" [style.background]="rowData[col.field] == true ? '#25dc25' : '#ff0000'"></div>
+            </div>
+            <div *ngIf="col.filterMode == 'file'" style="text-align: center;">
+              <app-downloadfile [serviceName]="col.serviceName" [selectedFile]="rowData[col.field]"></app-downloadfile>
+            </div>
+            <div *ngIf="col.filterMode == 'url'" style="text-align: center;">            
+              <a mat-raised-button style="background: #006fc2;color: white;border-radius: 50px;"  *ngIf="rowData[col.field] != null && rowData[col.field] != ''" [href]="rowData[col.field]" target="_blank">Go To URL</a>
+            </div>
+            <div *ngIf="col.translate == true">
+              {{ rowData[col.field] | translate }}
+            </div>
+
+            <div *ngIf="col.showMore == true">
+              <app-show-more [textValue]="rowData[col.field | translate]"></app-show-more>
+            </div>
+
+            <div
+            *ngIf="col.filterMode !== 'date' && col.filterMode !== 'datetime'&& col.filterMode !== 'time' && col.filterMode !== 'timeFromDate' && col.filterMode !== 'check' && col.filterMode !== 'file' && col.filterMode !== 'url' && col.translate !== true && col.showMore !== true && col.filterMode !== 'status'">
+              {{ rowData[col.field | translate] }}
+          </div>
+
+          </div>
+        </td>
+        <td *ngIf="actions">
+          <span *ngFor="let action of actions">
+            <span *ngIf="action.isEdit && roles.canUpdate" class="iconPadding">
+              <mat-icon style="cursor: pointer;" [color]="(action.color === undefined?'accent':action.color)"
+                (click)="addRow(rowData)" [matTooltip]="'edit' | translate">edit
+              </mat-icon>
+            </span>
+            <span *ngIf="action.isView" class="iconPadding">
+              <mat-icon style="cursor: pointer;" (click)="openViewDetail(rowData)"
+                [matTooltip]="(action.name === undefined? 'details' : action.name ) | translate ">
+                {{action.icon === undefined? 'visibility' : action.icon}}
+              </mat-icon>
+            </span>
+            <span *ngIf="action.isAssign" class="iconPadding">
+              <mat-icon style="cursor: pointer;" (click)="openAssignDetail(rowData)"
+                [matTooltip]="(action.name === undefined? 'details' : action.name ) | translate ">
+                {{action.icon === undefined? 'visibility' : action.icon}}
+              </mat-icon>
+            </span>
+            <span *ngIf="action.isDelete && roles.canDelete" class="iconPadding">
+              <mat-icon style="cursor: pointer;" color="warn" [matTooltip]="'deletetrans' | translate"
+                (click)="openDeleteDialog(rowData.id)">delete
+              </mat-icon>
+            </span>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td style="text-align: center; color: red; font-size: 18px;" [attr.colspan]="columns.length + 2">
+          {{'noData' | translate}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!--Footer And Paginator-->
+  <div class="footer">
+
+    <div class="custom-paginator">
+      <p-paginator [rows]="pageSize" (onPageChange)="setPage($event)" [rowsPerPageOptions]="[10,25,50,100,200,300]"
+        [totalRecords]="tableCore.pageOptions.count" [ngClass]="{'arabic':!localize.isEnglish()}">
+      </p-paginator>
+
+      <div class="count">
+        {{
+          (tableCore.pageOptions.offset -1) * tableCore.pageOptions.limit  <=
+          tableCore.pageOptions.count
+            ? (tableCore.pageOptions.offset - 1) * tableCore.pageOptions.limit
+            : tableCore.pageOptions.count != -1
+            ? tableCore.pageOptions.count
+            : columns.length
+        }}
+        -
+        {{
+          tableCore.pageOptions.offset * tableCore.pageOptions.limit +
+            tableCore.pageOptions.limit <=
+          tableCore.pageOptions.limit
+            ? tableCore.pageOptions.count != -1
+              ? tableCore.pageOptions.offset * tableCore.pageOptions.limit +
+                  tableCore.pageOptions.limit >=
+                tableCore.pageOptions.count
+                ? tableCore.pageOptions.count
+                : tableCore.pageOptions.offset * tableCore.pageOptions.limit +
+                  tableCore.pageOptions.limit
+              : columns.length
+            : tableCore.pageOptions.count != -1
+            ? tableCore.pageOptions.count
+            : columns.length
+        }}
+      </div>
+    </div>
+  </div>
+</div>
+

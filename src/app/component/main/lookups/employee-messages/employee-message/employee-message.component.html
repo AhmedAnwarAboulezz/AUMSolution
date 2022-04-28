@@ -1,0 +1,38 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'lookup.device'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form" novalidate > 
+      <div class="example-container">
+        <div class=row>
+               
+          <div class="col-md-12">                    
+            <app-mat-datepicker-shared 
+              [parentForm]="form" [lblName]= "'employeemessage.fromDateShow' | translate"   
+              [required]="true"   [title]="'lookup.tooltip' | translate"   
+              [matDatepicker]="'fromDateShowPicker'"  [namecontrol]="'fromDateShow'"  >
+            </app-mat-datepicker-shared> 
+          </div>
+
+         <mat-form-field appearance="outline" class="col-12 col-md-12">
+          <mat-label>{{'employeemessage.fromTimeShow' | translate}}</mat-label>
+          <input type="time" autocomplete="off" matInput formControlName="fromTimeShow">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'employeemessage.period' | translate}}</mat-label>
+            <input type="number" min="1" oninput="this.value = Math.abs(this.value)" autocomplete="off" matInput formControlName="period">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'employeemessage.message' | translate}}</mat-label>
+            <input type="text" autocomplete="off" matInput formControlName="message">
+          </mat-form-field>
+
+
+        </div>       
+      </div>
+    </mat-dialog-content>
+    <app-save-and-close [form]="form" (close)="onAddSave($event)"></app-save-and-close>
+
+    <!-- <app-save-and-close [form]="form" (close)="close($event)"></app-save-and-close>   -->
+  
+  </div>

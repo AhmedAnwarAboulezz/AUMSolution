@@ -1,0 +1,18 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'accessDoor.accessDoor'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form" novalidate > 
+      <div class="example-container">
+        <div class=row>
+          <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'accessDoor.accessDoorDescription' | translate}}</mat-label>
+            <input autocomplete="off" matInput formControlName="accessDoorDescription">
+          </mat-form-field>
+          <!-- <mat-form-field appearance="outline" class="col-12 col-md-12">
+            <mat-label>{{'accessDoor.doorName' | translate}}</mat-label>
+            <input matInput formControlName="accessDoorName" required title="{{'lookup.tooltip' | translate}}">
+          </mat-form-field> -->
+        </div>
+      </div>
+    </mat-dialog-content>  
+    <app-save-and-close [form]="form" (close)="close($event)"></app-save-and-close>  
+  </div>

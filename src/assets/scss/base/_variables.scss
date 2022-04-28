@@ -1,0 +1,46 @@
+$primary: #6a008a;
+$primary-light: rgba($primary, 0.4);
+$secondary: #868e96;
+$danger: #fe7096;
+$warning: #ffd500;
+$light: rgba(128, 73, 169, 0.15);
+$green: #07cdae;
+$blue-light: #0099cb;
+$page-bg: #f7f9fd;
+$sidebar-hover: #6a008a;
+$purple: #747cf3;
+$white: white;
+$black: black;
+$dark: #1d252d;
+$text-light: #d9d9d9;
+$text-dark: #212a36;
+$middle: #8e9aa0;
+$success: #00c48c;
+$success-light: rgba(
+    $color: $success,
+    $alpha: 0.11,
+);
+$error: #ff375e;
+$error-light: rgba(
+    $color: $error,
+    $alpha: 0.11,
+);
+$inprogress: #d6a100;
+$inprogress-light: rgba(
+    $color: $inprogress,
+    $alpha: 0.11,
+);
+$box-shadow: 0 3px 12px rgba(6, 11, 47, 0.06);
+
+$sidebar-bg: $white;
+$theme-gradient-colors: (
+    primary: linear-gradient(to right, #6a008a, #fe7096),
+    secondary: linear-gradient(to right, #e7ebf0, #868e96),
+    success: linear-gradient(to right, #84d9d2, #07cdae),
+    info: linear-gradient(to right, #90caf9, #047edf 99%),
+    warning: linear-gradient(to right, #f6e384, #e67e22),
+    danger: linear-gradient(to right, #da8cff, #9a55ff),
+    light: linear-gradient(to bottom, #f4f4f4, #e4e4e9),
+    dark: linear-gradient(89deg, #5e7188, #3e4b5b),
+    red: linear-gradient(to right, #e74c3c, #e67e22),
+);

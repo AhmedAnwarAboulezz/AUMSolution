@@ -1,0 +1,284 @@
+
+<div class="d-flex alig-items-center  mb-4">
+  <i class="bi bi-house-fill text-gradient-primary font-26 mt-1"></i>
+  <h1 class="text-gradient-primary font-weight-bold font-24 mx-2 m-0">
+    {{ 'ScreenName.HomeComponent' | translate }}
+  </h1>
+</div>
+  <!-- <div class="row">
+    <div class="col-lg-3 mb-2" *ngFor="let card of cards;let i = index">
+      <div class="card1 p-1 item-card rounded-0" [ngClass]="taskClasses[i]">
+        <div class="card-body d-flex justify-content-between">
+          <div class="card-icon">
+            <span>
+              <i class="material-icons"> {{ card.icon }} </i>
+            </span>
+          </div>
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="card-title">
+              <h3 class="font-weight-bold">
+                {{localize.lang =='en' ? card.textFl : card.textSl}}
+              </h3>
+            </div>
+            <div class="card-count">
+              <h3 class="font-weight-bold">{{ card.itemvalue}} {{localize.lang =='en' ? card.itemUnitFl : card.itemUnitSl}}</h3>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  
+<!-- <div class="row mt-12" *ngIf="showLoader">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="card">
+      <h4>{{ 'dashboard.waitingAttendanceData' | translate}}</h4>
+      <br>
+      <div style="height: 63px;">
+        <app-loading></app-loading>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<!-- <div class="row  mt-2">
+  <div class="col-lg-6">
+    <div class="card chart-card">
+      <div class="card-body">
+        <h2 class="text-gradient-primary font-26">{{ 'dashboard.leavesForToday' | translate}}</h2>
+        <div *ngIf="localize.lang == 'en'" class="d-flex flex-column flex-wrap justify-content-between">
+          <app-doughnut [colors]="vacationColors" [singleDataSet]="vacations" [labels]="vacationLabelsFl">
+          </app-doughnut>
+          <div id="tickets-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
+            <ul>
+              <li class="list-item" *ngFor="let label of vacationLabelsFl; let i = index">
+                <span class="legend-dots" [style.background]="vacationColors[i]"></span>{{ label}}
+                <span class="float-right">{{ vacations[i] }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="localize.lang == 'ar'" class="d-flex flex-column flex-wrap justify-content-between">
+          <app-doughnut [colors]="vacationColors" [singleDataSet]="vacations" [labels]="vacationLabelsSl">
+          </app-doughnut>
+          <div id="tickets-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
+            <ul>
+              <li class="list-item" *ngFor="let label of vacationLabelsSl; let i = index">
+                <span class="legend-dots" [style.background]="vacationColors[i]"></span>{{ label}}
+                <span class="float-left">{{ vacations[i] }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<div class="row  mt-2">
+  <div class="col-lg-6">
+    <div class="card chart-card">
+      <div class="card-body">
+        <h2 class="text-gradient-primary font-26">{{ 'device.DevicesUnRegister' | translate}}</h2>
+        <div *ngIf="!unRegisteredDevicePieChart">
+          <p class="text-center">{{ 'dashboard.noData' | translate}}</p>
+        </div>
+        <div *ngIf="unRegisteredDevicePieChart">
+          <div *ngIf="localize.lang == 'en'" class="d-flex flex-column flex-wrap justify-content-between">
+            <app-doughnut [colors]="unRegisteredDeviceColors" [singleDataSet]="unRegisteredDevices" [labels]="unRegisteredDeviceLabelsFl">
+            </app-doughnut>
+            <div id="tickets-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
+              <ul>
+                <li class="list-item" *ngFor="let label of unRegisteredDeviceLabelsFl; let i = index">
+                  <span class="legend-dots" [style.background]="unRegisteredDeviceColors[i]"></span>
+                  <a target="_blank" routerLink="/main/lookups/devices-Register-with-unRegister">{{ label}}</a>
+                  <span class="float-right">{{ unRegisteredDevices[i] }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div *ngIf="localize.lang == 'ar'" class="d-flex flex-column flex-wrap justify-content-between">
+            <app-doughnut [colors]="unRegisteredDeviceColors" [singleDataSet]="unRegisteredDevices" [labels]="unRegisteredDeviceLabelsSl">
+            </app-doughnut>
+            <div id="tickets-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
+              <ul>
+                <li class="list-item" *ngFor="let label of unRegisteredDeviceLabelsSl; let i = index">
+                  <span class="legend-dots" [style.background]="unRegisteredDeviceColors[i]"></span>
+                  <a target="_blank" routerLink="/main/lookups/devices-Register-with-unRegister">{{ label}}</a>
+                  <span class="float-left">{{ unRegisteredDevices[i] }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card chart-card">
+      <div class="card-body">
+        <h2 class="text-gradient-primary font-26">{{ 'dashboard.accessTerminalDevicesToday' | translate}}</h2>
+        <div *ngIf="!accessTerminalDoughnutChart">
+          <p class="text-center">{{ 'dashboard.noData' | translate}}</p>
+        </div>
+        <div *ngIf="accessTerminalDoughnutChart">
+          <div *ngIf="localize.lang == 'en'" class="d-flex flex-column flex-wrap justify-content-between">
+            <app-doughnut [labels]="accessTerminallabelsFl" [singleDataSet]="accessTerminals" [colors]="accessTerminalColors">
+            </app-doughnut>
+            <div id="internalTasks-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
+              <ul>
+                <li class="list-item" *ngFor="let label of accessTerminallabelsFl; let i = index">
+                  <span class="legend-dots" [style.background]="accessTerminalColors[i]"></span>
+                  <a target="_blank" routerLink="/main/lookups/device-monitor">{{ label}}</a>
+                  <span class="float-right">{{ accessTerminals[i] }} {{ 'dashboard.device' | translate}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div *ngIf="localize.lang == 'ar'" class="d-flex flex-column flex-wrap justify-content-between">
+            <app-doughnut [labels]="accessTerminallabelsSl" [singleDataSet]="accessTerminals" [colors]="accessTerminalColors">
+            </app-doughnut>
+            <div id="internalTasks-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
+              <ul>
+                <li class="list-item" *ngFor="let label of accessTerminallabelsSl; let i = index">
+                  <span class="legend-dots" [style.background]="accessTerminalColors[i]"></span>
+                  <a target="_blank" routerLink="/main/lookups/device-monitor">{{ label}}</a>
+                  <!-- <a  href="javascript:" (click)="chartOnClick('accessTerminal',i,label)">{{ label}}</a>                   -->
+                  <span class="float-left">{{ accessTerminals[i] }} {{ 'dashboard.device' | translate}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- <hr />
+          <div class="card-hint">
+            <i class="material-icons">add</i>
+            <a target="_blank" routerLink="/main/lookups/device-monitor">{{ 'dashboard.more' | translate}}</a>
+          </div> -->          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card">
+      <h4>{{ 'dashboard.employeeInDevice' | translate}}</h4>
+      <div *ngIf ="haveemployeeInDevice">
+        <app-bar *ngIf="localize.lang == 'ar'" [data]="employeeInDevicesDataSl" [colors]="employeeInDeviceColors"
+          [labels]="employeeInDeviceLabelsSl" (clickEvent)= clickEventemployeeInDevice($event)  ></app-bar>
+        <app-bar *ngIf="localize.lang != 'ar'" [data]="employeeInDevicesDataFl" [colors]="employeeInDeviceColors"
+          [labels]="employeeInDeviceLabelsFl" (clickEvent)= clickEventemployeeInDevice($event) ></app-bar>
+      </div>
+      <div *ngIf="!haveemployeeInDevice">
+        <p class="text-center">{{ 'dashboard.noData' | translate}}</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<div class="row" mt-2>
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card">
+      <h4>{{ 'dashboard.employeeStatusForToday' | translate}}</h4>
+
+
+      <app-bar *ngIf="!haveEmployeeData && localize.lang == 'ar'" [data]="employeeStatusDataSl"
+        [colors]="employeeColors" [labels]="employeeLabelsSl" (clickEvent)=clickEvent($event)></app-bar>
+      <app-bar *ngIf="!haveEmployeeData && localize.lang != 'ar'" [data]="employeeStatusDataFl"
+        [colors]="employeeColors" [labels]="employeeLabelsFl" (clickEvent)=clickEvent($event)></app-bar>
+      <app-bar *ngIf="haveEmployeeData && localize.lang == 'ar'" [data]="employeeStatusDataSl" [colors]="employeeColors"
+        [labels]="employeeLabelsSl" (clickEvent)=clickEvent($event)></app-bar>
+      <app-bar *ngIf="haveEmployeeData && localize.lang != 'ar'" [data]="employeeStatusDataFl" [colors]="employeeColors"
+        [labels]="employeeLabelsFl" (clickEvent)=clickEvent($event)></app-bar>
+        <div class="row" style="margin: 5px;">
+          <p class="col-md-3" style="margin-top: 9px; color: #007ad9;
+          font-weight: 500;">{{ 'dashboard.showmore' | translate}}</p>
+          <select class="col-md-9 form-control" style="color: #007ad9;
+          text-decoration: underline;" #mySelect
+            (change)='onOptionsSelected(mySelect.value)'>
+            <option></option>
+                            
+            <option value="main/usermanagement/employee-group-expired-date-dash-board">
+              {{ 'dashboard.employeeGroupexpiredDate' | translate}} </option>
+            <option value="main/usermanagement/employee-group-expired-date-today-dash-board">
+              {{ 'dashboard.employeeGroupexpiredDatetoday' | translate}} </option>
+
+            <option value="main/usermanagement/employee-group-expired-date-soon-dash-board">
+              {{ 'dashboard.employeeGroupexpiredDatesoon' | translate}} </option>
+
+          </select>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card">
+      <h4>{{ 'dashboard.employeeRemarks' | translate}}</h4>
+      <div *ngIf ="haveemployeeWithRemarkData">
+        <app-bar *ngIf="localize.lang == 'ar'" [data]="employeeWithRemarkStatusDataSl" [colors]="employeeWithRemarkColors"
+          [labels]="employeeWithRemarkLabelsSl" ></app-bar>
+        <app-bar *ngIf="localize.lang != 'ar'" [data]="employeeWithRemarkStatusDataFl" [colors]="employeeWithRemarkColors"
+          [labels]="employeeWithRemarkLabelsFl" ></app-bar>
+      </div>
+      <div *ngIf="!haveemployeeWithRemarkData">
+        <p class="text-center">{{ 'dashboard.noData' | translate}}</p>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+
+
+<!-- First Row-->
+
+<!-- <div class="row mt-4">
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card" [hidden]="true">
+      <app-pie [labels]="hiddenLables" [singleDataSet]="hiddenValues" [colors]="hiddenColors"></app-pie>
+    </div>
+    <div class="card">
+      <h4>{{ 'dashboard.leavesForToday' | translate}}</h4>
+      <div *ngIf="vacationPieChart">
+        <app-pie [labels]="vacationLabelsFl" [singleDataSet]="vacations" [colors]="vacationColors" (clickEvent)=PieClickEvent(0,$event)></app-pie>
+        <hr />
+        <div class="card-hint">
+          <i class="material-icons">add</i>
+          <a target="_blank" routerLink="/main/leaves/employee-leaves-dashboard">{{ 'dashboard.more' | translate}}</a>
+        </div>
+      </div>
+      <div *ngIf="!vacationPieChart">
+        <p class="text-center">{{ 'dashboard.noData' | translate}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card">
+      <h4>{{ 'dashboard.fullDayPermissionForToday' | translate}}</h4>
+      <div *ngIf="accessTerminalDoughnutChart">
+        <app-pie *ngIf="localize.lang == 'en'" [labels]="accessTerminallabelsFl" [singleDataSet]="accessTerminals"
+          [colors]="accessTerminalColors" (clickEvent)=PieClickEvent(1,$event)></app-pie>
+        <app-pie *ngIf="localize.lang == 'ar'" [labels]="accessTerminallabelsSl" [singleDataSet]="accessTerminals"
+          [colors]="accessTerminalColors" (clickEvent)=PieClickEvent(1,$event)></app-pie>
+        <hr />
+        <div class="card-hint">
+          <i class="material-icons">add</i>
+          <a target="_blank" routerLink="/main/accessTerminals/employee-fullday-dashboard">{{ 'dashboard.more' | translate}}</a>
+        </div>
+      </div>
+      <div *ngIf="!accessTerminalDoughnutChart">
+        <p class="text-center">{{ 'dashboard.noData' | translate}}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+

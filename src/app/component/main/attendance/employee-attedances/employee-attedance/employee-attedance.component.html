@@ -1,0 +1,56 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'employeeattendance.employeeAttedancesLog'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form">
+      <div class="example-container">
+        <div class="row">
+          <div class="col-md-5">
+            <p class="text-center">{{'employeeattendance.employeeDefaultImage' | translate}}</p>
+            <img mat-card-image [src]="emplyeeDefaultImage"
+            style="height: 162px; object-fit: scale-down;">
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5">
+            <p class="text-center">{{'employeeattendance.movementImage' | translate}}</p>
+            <img mat-card-image [src]="movementImage" 
+            style="height: 162px; object-fit: scale-down;">
+          </div>
+        </div>
+        <div class=row>
+          <mat-form-field appearance="outline" class="col-12 col-md-6">
+            <mat-label>{{'employeeattendance.employeeNumber' | translate}}</mat-label>
+            <input  [readonly]="true" matInput formControlName="employeeNumber" >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-12 col-md-6">
+            <mat-label>{{'employeeattendance.deviceDetail' | translate}}</mat-label>
+            <input  [readonly]="true" matInput formControlName="deviceDetail"  [readonly]="isViewDetils">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-6">
+            <mat-label>{{'employeeattendance.timeEntry' | translate}}</mat-label>
+            <input [readonly]="true" matInput formControlName="timeEntryStr"  [readonly]="isViewDetils">
+          </mat-form-field>       
+
+          <mat-form-field appearance="outline" class="col-12 col-md-6">
+            <mat-label> {{'employeeattendance.remark' | translate}} </mat-label>
+            <mat-select [disabled]="true" formControlName="remarkId">
+              <mat-option *ngFor="let item of remarks" [value]="item.id"> 
+                {{ localize.currentLang =='Fl' ? item.remarkEn : item.remarkAr }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+                 
+        <mat-form-field appearance="outline" class="col-12 col-md-6">
+          <mat-label> {{'employeeattendance.logType' | translate}} </mat-label>
+            <mat-select formControlName="logTypeId"  [disabled]="isViewDetils" >
+              <mat-option *ngFor="let item of logTypes" [value]="item.id"> 
+                {{ localize.currentLang =='Fl' ? item.logTypeNameEn : item.logTypeNameAr }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-dialog-content>  
+    <mat-dialog-actions align="end" *ngIf="!isViewDetils">
+        <button data-display="static" mat-raised-button color="primary" [disabled]="!this.form.valid" cdkFocusInitial
+          (click)="onEditSave(form.value)">{{'saveclose' | translate}}</button>
+      </mat-dialog-actions>
+  
+  </div>

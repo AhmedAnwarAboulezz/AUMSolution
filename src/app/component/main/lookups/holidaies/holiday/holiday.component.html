@@ -1,0 +1,41 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+    <app-dialogheader [text]="'holidayDates.holidayDates'" (onclick)="onNoClick('Close')"></app-dialogheader>
+    <mat-dialog-content class="mat-typography" [formGroup]="form">
+      <div class="example-container">
+        <div class=row>
+            <mat-form-field appearance="outline" class="col-6">
+                <mat-label>{{'holidayDates.holidayName' | translate}}</mat-label>
+                <input autocomplete="off" matInput formControlName="holidayName" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="col-6">
+                <mat-label>{{'holidayDates.holidayCode' | translate}}</mat-label>
+                <input [readonly]="!isNew" type="number" autocomplete="off" matInput formControlName="holidayId" />
+              </mat-form-field>
+
+          <div  class="col-6">        
+            <app-mat-datepicker-shared 
+            [parentForm]="form"
+            [lblName]= "'holidayDates.startDate' | translate"   
+            [required]="true" 
+            [title]="'lookup.tooltip' | translate"   
+            [matDatepicker]="'startDatePicker'"
+            [namecontrol]="'startDate'"
+          >
+          </app-mat-datepicker-shared> 
+        </div>
+          <!-- <div  class="col-12 col-md-6">         
+            <app-mat-datepicker-shared 
+            [parentForm]="form"
+            [lblName]= "'holidayDates.endDate' | translate"   
+            [required]="true" 
+            [title]="'lookup.tooltip' | translate"   
+            [matDatepicker]="'endDatePicker'"
+            [namecontrol]="'endDate'"  >
+          </app-mat-datepicker-shared> 
+  
+          </div>        -->
+        </div>
+      </div>
+    </mat-dialog-content>
+    <app-save-and-close [form]="form" (close)="close($event)"></app-save-and-close>
+  </div>

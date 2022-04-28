@@ -1,0 +1,9 @@
+<div relative>
+    <app-data-table [url]="{
+        getAll: 'Devices/GetAllPagedUnRegisteredDevice'        
+      }"  [id]="'id'" [columns]="columns" [actions]="actions" [options]="{
+          globalSearch: true,
+          details: false
+        }" [tableData]="tableData">
+      </app-data-table>
+</div>

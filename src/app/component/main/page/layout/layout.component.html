@@ -1,0 +1,22 @@
+<main class="d-flex" [dir]="localizationService.lang === 'ar' ? 'rtl' : 'ltr'">
+  <app-sidebar></app-sidebar>
+
+  <section class="d-flex flex-column flex-grow-1" style="overflow: auto;">
+    <app-navbar></app-navbar>
+
+    <section class="main-page d-flex flex-column flex-grow-1 position-relative p-2">
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </section>
+    <footer>
+      <mat-toolbar>
+        <div class="copyright">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">copyright</mat-icon>
+            APEX UNITED {{year}}
+        </div>
+      </mat-toolbar>
+    </footer>
+  </section>
+
+</main>

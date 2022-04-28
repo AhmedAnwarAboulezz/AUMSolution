@@ -1,0 +1,7 @@
+@mixin customTransition($x) {
+    -webkit-transition: $x ease-in-out;
+    -moz-transition   : $x ease-in-out;
+    -ms-transition    : $x ease-in-out;
+    -o-transition     : $x ease-in-out;
+    transition        : $x ease-in-out;
+}

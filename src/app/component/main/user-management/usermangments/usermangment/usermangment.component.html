@@ -1,0 +1,91 @@
+<div [className]="'textAlign' | translate" [dir]="'dir' | translate">
+
+  <app-dialogheader [text]="'usermangments.title'" (onclick)="onNoClick('Close')"></app-dialogheader>
+  <mat-card class="example-container">
+    <mat-dialog-content class="mat-typography" [formGroup]="form">
+      <div class="example-container">
+        
+        <div class="row">
+        
+          <mat-form-field appearance="outline" class="col-6 col-md-6">
+            <mat-label>{{'usermangments.userName' | translate}}</mat-label>
+            <input autocomplete="off" required matInput formControlName="userName" >
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-6 col-md-6">
+            <mat-label>{{'usermangments.email' | translate}}</mat-label>
+            <input autocomplete="off"  matInput formControlName="email" >
+          </mat-form-field>
+
+         
+
+        </div>
+        <div class="row">  
+          <mat-form-field appearance="outline" class="col-6 col-md-6">
+            <mat-label>{{'usermangments.password' | translate}}</mat-label>
+            <input autocomplete="off" matInput placeholder="{{'usermangments.password' | translate}} " [readonly]="passdisable"
+              [type]="hide ? 'password' : 'text'" formControlName="password" title="{{'lookup.tooltip' | translate}}">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+       
+          <div class="col-6 col-md-4">
+            <app-mat-datepicker-shared 
+            [parentForm]="form"            
+            [lblName]= "'usermangments.expireDate' | translate"            
+            [title]="'lookup.tooltip' | translate"  
+            [matDatepicker]="'expireDatePicker'"
+            [namecontrol]="'expireDate'" >
+          </app-mat-datepicker-shared> 
+
+
+          </div>
+          <mat-slide-toggle class="col-6 col-md-2 move text-left" formControlName="isActive" color="primary"
+          labelPosition="after">
+          {{'usermangments.active' | translate}}
+        </mat-slide-toggle>
+        
+        </div>
+
+        <div class="row">
+
+          <mat-form-field appearance="outline" class="col-12 col-md-6">
+            <mat-label>{{'usermangments.rolename' | translate}}</mat-label>
+            <mat-select required title="{{'lookup.tooltip' | translate}}" formControlName="roleId">
+              <mat-option>---</mat-option>
+              <mat-option  *ngFor="let role of roles" [value]="role.id">
+              {{ role.roleNameEn}}</mat-option>
+            </mat-select>
+      </mat-form-field> 
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="col-12 col-md-12">
+              <mat-label>{{'usermangments.branch' | translate}}</mat-label>
+              <input autocomplete="off" required #textgroups matInput placeholder="{{ 'Filter.Branchs' | translate }}" autocomplete="off">
+
+              <mat-select formControlName="userBranches" multiple>
+                <mat-option #allSelected (click)="toggleAllSelection(allSelected.selected,true)" [value]="0">
+                  {{'all' | translate}}
+                </mat-option>
+                <mat-option (click)="toggleUnSelectAll(allSelected.selected, true)"
+                  *ngFor="let branch of branchs" [value]="branch.id">
+                  {{ branch.branchNameEn }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            
+          </div>
+        
+        </div>
+
+
+
+
+
+
+      </div>
+    </mat-dialog-content>
+  </mat-card>
+
+  <app-save-and-close [form]="form" (close)="onCloseConfirmation($event)"></app-save-and-close>
+
+
+</div>
